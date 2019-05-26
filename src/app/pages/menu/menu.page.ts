@@ -10,35 +10,35 @@ export class MenuPage implements OnInit {
   pages = [
     {
       'title': 'Dashboard',
-      'url': 'home'
+      'url': '/menu/menu/home'
     },
     {
       'title': 'Perfil',
-      'url': 'perfil'
+      'url': '/menu/menu/perfil'
     },
     {
       'title': 'Usuarios',
-      'url': 'usuarios'
+      'url': '/menu/menu/usuarios'
     },
     {
       'title': 'RH',
-      'url': 'rh'
+      'url': '/menu/menu/rh'
     },
     {
       'title': 'Activos',
-      'url': 'activos'
+      'url': '/menu/menu/activos'
     },
     {
       'title': 'Viaticos',
-      'url': 'viaticos'
+      'url': '/menu/menu/viaticos'
     },
     {
       'title': 'Flotilla',
-      'url': 'flotilla'
+      'url': '/menu/menu/flotilla'
     },
     {
       'title': 'Salir',
-      'url': 'salir'
+      'url': '/menu/menu/salir'
     }
   ];
 

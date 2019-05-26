@@ -9,7 +9,7 @@ import { MenuPage } from './menu.page';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'menu',
     component: MenuPage,
     children: [
       { path: 'home', loadChildren: '../home/dashboard/dashboard.module#DashboardPageModule' },

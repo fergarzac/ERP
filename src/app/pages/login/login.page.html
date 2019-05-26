@@ -1,24 +1,26 @@
 
 <ion-content style="--background: linear-gradient(to right, #1CAF9A 0%, #17A2B8 100%)">
 <div style="position:absolute;top:30%;width: 100%;padding: 0 40px">
-  <ion-item>
-    <ion-label position="floating">Usuario</ion-label>
-    <ion-input autocomplete="off"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">Contraseña</ion-label>
-    <ion-input autocomplete="off" type="password"></ion-input>
-  </ion-item>
-  <ion-button expand="full" style="margin-top:10px">
-    Iniciar Sesión
-  </ion-button>
+  <form #form="ngForm" (ngSubmit)="login(form)">
+    <ion-item>
+      <ion-label position="floating">Usuario</ion-label>
+      <ion-input autocomplete="off" name="nombre" ngModel required clearInput></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-input autocomplete="off" type="password" name="password" ngModel required clearInput></ion-input>
+    </ion-item>
+    <ion-button type="submit" expand="full" style="margin-top:10px">
+      Iniciar Sesión
+    </ion-button>
+  </form>
   <ion-row style="margin-top:20px">
     <a href="#" style="text-decoration:none;color:#fff">
       ¿Olvidaste tu contraseña?
     </a>
   </ion-row>
   <ion-row style="margin-top:20px">
-    <a href="#" style="text-decoration:none;color:#fff">
+    <a href="registrar" style="text-decoration:none;color:#fff">
       Registrarse
     </a>
   </ion-row>
