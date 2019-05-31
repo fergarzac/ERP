@@ -7,7 +7,7 @@ const routes: Routes = [
   { path: 'menu', loadChildren: './pages/menu/menu.module#MenuPageModule' },
   { path: 'registrar', loadChildren: './registrar/registrar.module#RegistrarPageModule' },
 ];
-
+ 
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })

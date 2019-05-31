@@ -19,6 +19,10 @@ const routes: Routes = [
       { path: 'activos', loadChildren: '../activos/index/index.module#IndexPageModule' },
       { path: 'viaticos', loadChildren: '../viaticos/index/index.module#IndexPageModule' },
       { path: 'flotilla', loadChildren: '../flotilla/index/index.module#IndexPageModule' },
+      { path: 'rh/agregar', loadChildren: '../rh/agregar/agregar.module#AgregarPageModule' },
+      { path: 'rh/departamentos', loadChildren: '../rh/departamentos/departamentos.module#DepartamentosPageModule' },
+      { path: 'rh/perfil', loadChildren: '../rh/perfil/perfil.module#PerfilPageModule' },
+      
     ]
   },
   { path: '' , redirectTo: 'menu/home'}

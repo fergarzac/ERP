@@ -2,20 +2,22 @@
     <ion-toolbar>
         <ion-buttons slot="start">
             <ion-menu-button></ion-menu-button>
-          </ion-buttons>
+        </ion-buttons>
       <ion-title>RH</ion-title>
+      <ion-buttons slot="end">
+          <ion-button (click) = 'showBusqueda()'><ion-icon name="search"></ion-icon></ion-button>
+      </ion-buttons>
     </ion-toolbar>
   </ion-header>
   
   <ion-content>
-      <ion-button expand="full" style="margin:10px">
-          Nuevo Trabajador
-      </ion-button>
-      <ion-button expand="full" style="margin:10px">
-          Nuevo Departamento
-      </ion-button>
+      
+      <ion-row *ngIf="busqueda" style="background:#26354a">
+          <ion-searchbar placeholder="Trabajador" (ionChange)="buscarTrabajador()" [(ngModel)]="trabajador"></ion-searchbar>
+          <ion-searchbar placeholder="Departamento" (ionChange)="buscarDepartamento()" [(ngModel)]="departamento"></ion-searchbar>
+      </ion-row>
       <div style="width: 100%">
-          <ion-card >
+          <ion-card *ngFor="let trabajador of listaTrabajadores" (click) = 'perfilUsuario(trabajador.id)'>
               <ion-card-content>
                 <div style="width: 100%">
                   <div style="width: 20%;display: inline-block;">
@@ -24,42 +26,25 @@
                       </ion-thumbnail>
                   </div>
                   <div style="width: 80%;display: inline-block;">
-                      <ion-card-title>Katherine Lumaad</ion-card-title>
-                      <ion-card-subtitle>klumaad@sisna.mx</ion-card-subtitle>
+                      <ion-card-title>{{trabajador.nombre}}</ion-card-title>
+                      <ion-card-subtitle>{{trabajador.email}}</ion-card-subtitle>
                   </div>
                 </div>
               </ion-card-content>
           </ion-card>
-          <ion-card >
-                <ion-card-content>
-                  <div style="width: 100%">
-                    <div style="width: 20%;display: inline-block;">
-                        <ion-thumbnail slot="start">
-                          <img src="https://via.placeholder.com/500" style="--border-radius: 50%">
-                        </ion-thumbnail>
-                    </div>
-                    <div style="width: 80%;display: inline-block;">
-                        <ion-card-title>Gorgonia Magalpok</ion-card-title>
-                        <ion-card-subtitle>you@sisna.mx</ion-card-subtitle>
-                    </div>
-                  </div>
-                </ion-card-content>
-          </ion-card>
-          <ion-card >
-              <ion-card-content>
-                <div style="width: 100%">
-                  <div style="width: 20%;display: inline-block;">
-                      <ion-thumbnail slot="start">
-                        <img src="https://via.placeholder.com/500" style="--border-radius: 50%">
-                      </ion-thumbnail>
-                  </div>
-                  <div style="width: 80%;display: inline-block;">
-                      <ion-card-title>Marilyn Tarter</ion-card-title>
-                      <ion-card-subtitle>mrilyn@sisna.mx</ion-card-subtitle>
-                  </div>
-                </div>
-              </ion-card-content>
-        </ion-card>
       </div>
+      <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button>
+          <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-list side="top">
+            <ion-fab-button (click) = 'agregarContacto()'>
+              <ion-icon name="contact"></ion-icon>
+            </ion-fab-button>
+            <ion-fab-button (click) = 'agregarDepartamento()'>
+              <ion-icon name="contacts"></ion-icon>
+            </ion-fab-button>
+          </ion-fab-list>	
+      </ion-fab>
   </ion-content>
   

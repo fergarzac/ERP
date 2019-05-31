@@ -10,11 +10,33 @@
                                 <ion-avatar>
                                     <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
                                 </ion-avatar>
-                                <ion-label>Nombre de Usuario</ion-label>
+                                
                             </div>
                         </ion-col>
                         <ion-col size-md="3" pull-md="9"></ion-col>
                     </ion-row>
+                    <ion-row style="text-align: center">
+                        <ion-col >
+                            <ion-label>Nombre de Usuario</ion-label>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row >
+                        <ion-col >
+                            <div (click)='perfil()' style="padding: 10px; border-radius: 5px; background: #1d2939;color: #fff;text-align: center">
+                                 
+                                Perfil
+                                <ion-icon style="color: #fff; margin-left: 10px" item-left name="list-box"></ion-icon>   
+                            </div>
+                        </ion-col>
+                        <ion-col >
+                            <div (click)='salir()' style="padding: 10px; border-radius: 5px; background: #1d2939;color: #fff;text-align: center">
+                                
+                                Salir
+                                <ion-icon style="color: #fff; margin-left: 10px" item-left name="exit"></ion-icon>
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                    
                 </ion-grid>
             </ion-toolbar>
         </ion-header>
@@ -23,7 +45,7 @@
             <ion-list style="background:#1d2939">
                 <ion-menu-toggle auto-hide="false" *ngFor="let p of pages" style="--background:#1d2939">
                     <ion-item style="--background:#1d2939; --color:#adb5bd" [routerLink] = "p.url" routerDirection="root">
-                        {{ p.title }}
+                            <ion-icon style="color: #fff; margin-right: 10px" [name]="p.icon" item-left ></ion-icon> {{ p.title }}
                     </ion-item>
                 </ion-menu-toggle>
             </ion-list>

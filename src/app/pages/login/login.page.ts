@@ -23,8 +23,18 @@ export class LoginPage implements OnInit {
 
     await alert.present();
   }
+
+  async errorAlert() {
+    const alert = await this.alertController.create({
+      header: 'Login',
+      message: '¡Ups! Con el servidor.',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
   login(form){
-    this.authService.login(form.value).subscribe((res) => {
+    this.authService.login(form.value).subscribe(res => {
       console.log(res);
       if (res.status == '1') {
         form.reset();
@@ -32,6 +42,9 @@ export class LoginPage implements OnInit {
       }else{
         this.presentAlert();
       }
-    });
+      },onerror => {
+        this.errorAlert();
+      }
+    );
   }
 }

@@ -9,36 +9,29 @@ import { Router, RouterEvent } from '@angular/router';
 export class MenuPage implements OnInit {
   pages = [
     {
-      'title': 'Dashboard',
-      'url': '/menu/menu/home'
-    },
-    {
-      'title': 'Perfil',
-      'url': '/menu/menu/perfil'
-    },
-    {
+      'icon': 'person',
       'title': 'Usuarios',
       'url': '/menu/menu/usuarios'
     },
     {
+      'icon': 'people',
       'title': 'RH',
       'url': '/menu/menu/rh'
     },
     {
+      'icon': 'build',
       'title': 'Activos',
       'url': '/menu/menu/activos'
     },
     {
+      'icon': 'clipboard',
       'title': 'Viaticos',
       'url': '/menu/menu/viaticos'
     },
     {
+      'icon': 'car',
       'title': 'Flotilla',
       'url': '/menu/menu/flotilla'
-    },
-    {
-      'title': 'Salir',
-      'url': '/menu/menu/salir'
     }
   ];
 
@@ -51,5 +44,7 @@ export class MenuPage implements OnInit {
 
   ngOnInit() {
   }
-
+  perfil() {
+    this.router.navigateByUrl('/menu/menu/perfil');
+  }
 }

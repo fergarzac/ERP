@@ -46,6 +46,7 @@ export class RegistrarPage implements OnInit {
   registrar(form){
     if(form.value.password == form.value.password2){
       this.authService.registrar(form.value).subscribe((res) => {
+        
         if (res.status == '1') {
           form.reset();
           this.presentAlert1();
