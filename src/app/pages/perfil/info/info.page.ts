@@ -1,15 +1,36 @@
 import { Component, OnInit } from '@angular/core';
+import { Platform } from '@ionic/angular';
+import { HttpClient } from  '@angular/common/http';
+import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
 
+const TOKEN_KEY = 'ACCESS_TOKEN';
+const TIPO_KEY = 'TIPO_ACCESS';
+const EMPRESA_KEY = 'EMPRESA_KEY';
 @Component({
   selector: 'app-info',
   templateUrl: './info.page.html',
   styleUrls: ['./info.page.scss'],
 })
 export class InfoPage implements OnInit {
-
-  constructor() { }
+  AUTH_SERVER_ADDRESS:  string  =  'http://localhost:8080';
+  nombre_empresa: string = '';
+  tipo: string = '';
+  email: string = '';
+  constructor(private storage: Storage,private ptf:Platform,private httpClient: HttpClient,private  router:  Router,public alertController: AlertController) { }
 
   ngOnInit() {
+    this.storage.get(TOKEN_KEY).then((val) => {
+      this.httpClient.get(this.AUTH_SERVER_ADDRESS + '/empresa/obtenerDatosEmpresa?id=80808541-7f22-11e9-a055-204747e63348').subscribe(data => {
+        console.log(data);
+        this.nombre_empresa = data['nombre'];
+        this.tipo = data['giro'];
+        this.email = data['correo'];
+      }, err => {
+        console.log(err);
+      });
+  });
   }
 
 }

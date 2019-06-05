@@ -7,6 +7,8 @@ import { HttpClient } from  '@angular/common/http';
 import { tap } from  'rxjs/operators';
 import { Storage } from '@ionic/storage';
 const TOKEN_KEY = 'ACCESS_TOKEN';
+const TIPO_KEY = 'TIPO_ACCESS';
+const EMPRESA_KEY = 'EMPRESA_KEY';
 @Injectable({
   providedIn: 'root'
 })
@@ -27,6 +29,8 @@ export class AuthService {
         console.log(this.AUTH_SERVER_ADDRESS + '/usuarios/login/?username='+user.nombre+"&contras="+user.password);
         if (res.status == '1') {
           await this.storage.set(TOKEN_KEY, res.token);
+          await this.storage.set(TIPO_KEY, res.rol);
+          await this.storage.set(EMPRESA_KEY, res.id_empresa);
           this.authstate.next(true);
         }else{
           this.authstate.next(false);
@@ -36,7 +40,7 @@ export class AuthService {
   }
 
   registrar(user: User): Observable<AuthResponse> {
-    return this.httpClient.get(this.AUTH_SERVER_ADDRESS + '/usuarios/agregar/?username='+user.nombre+"&pass="+user.password).pipe(
+    return this.httpClient.get(this.AUTH_SERVER_ADDRESS + '/usuarios/agregar/?username='+user.usuario+"&contras="+user.password+"&nombre="+user.nombre+"&apellido_p="+user.apellido_p+"&apellido_m="+user.apellido_m+"&id_empresa=80808541-7f22-11e9-a055-204747e63348").pipe(
       tap(async (res: AuthResponse) => {
         if (res.status == '1') {
           this.authstate.next(true);

@@ -9,11 +9,6 @@ import { Router, RouterEvent } from '@angular/router';
 export class MenuPage implements OnInit {
   pages = [
     {
-      'icon': 'person',
-      'title': 'Usuarios',
-      'url': '/menu/menu/usuarios'
-    },
-    {
       'icon': 'people',
       'title': 'RH',
       'url': '/menu/menu/rh'
@@ -45,6 +40,10 @@ export class MenuPage implements OnInit {
   ngOnInit() {
   }
   perfil() {
-    this.router.navigateByUrl('/menu/menu/perfil');
+    if(true){
+      this.router.navigateByUrl('/menu/menu/perfil');
+    }else{
+      this.router.navigateByUrl('/menu/menu/usuarios/perfil');
+    }
   }
 }

@@ -14,7 +14,6 @@ const routes: Routes = [
     children: [
       { path: 'home', loadChildren: '../home/dashboard/dashboard.module#DashboardPageModule' },
       { path: 'perfil', loadChildren: '../perfil/index/index.module#IndexPageModule' },
-      { path: 'usuarios', loadChildren: '../usuarios/index/index.module#IndexPageModule' },
       { path: 'rh', loadChildren: '../rh/index/index.module#IndexPageModule' },
       { path: 'activos', loadChildren: '../activos/index/index.module#IndexPageModule' },
       { path: 'viaticos', loadChildren: '../viaticos/index/index.module#IndexPageModule' },
@@ -25,7 +24,7 @@ const routes: Routes = [
       
     ]
   },
-  { path: '' , redirectTo: 'menu/home'}
+  { path: '' , redirectTo: 'menu/perfil'}
 ];
 
 @NgModule({

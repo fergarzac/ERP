@@ -6,6 +6,9 @@ const routes: Routes = [
   { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' },
   { path: 'menu', loadChildren: './pages/menu/menu.module#MenuPageModule' },
   { path: 'registrar', loadChildren: './registrar/registrar.module#RegistrarPageModule' },
+  { path: 'documents', loadChildren: './pages/rh/documents/documents.module#DocumentsPageModule' },
+  { path: 'index', loadChildren: './pages/usuarios/index/index.module#IndexPageModule' },
+  { path: 'perfil', loadChildren: './pages/usuarios/perfil/perfil.module#PerfilPageModule' },
 ];
  
 @NgModule({
@@ -15,3 +18,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+ 

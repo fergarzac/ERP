@@ -4,9 +4,44 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>Perfil Trabajador</ion-title>
+      <ion-buttons slot="end">
+        <ion-button color="secondary" (click) = "presentActionSheet()">
+          <ion-icon slot="icon-only" name="more"></ion-icon>
+        </ion-button>
+      </ion-buttons>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
-
+<div style="width: 100%;padding: 20px;height: 200px;background: #1d2939;color: #fff">
+  <div style="margin:auto;text-align: center">
+    <h3>{{nombre}}</h3>
+    <p style="color: #868ba1" *ngIf="puesto">{{puesto}}</p>
+    <p style="color: #868ba1" *ngIf="descripcion">{{descripcion}}</p>
+  </div>
+</div>
+<div style="width: 100%;padding: 5%">
+  <h4>Información de contacto</h4>
+  <p style="color:#868ba1" *ngIf="celular">Celular:</p>
+  <p style="color:darkcyan" *ngIf="celular">{{celular}}</p>
+  <br>
+  <p style="color:#868ba1">Email:</p>
+  <p style="color:darkcyan">{{email}}</p>
+  <br>
+  <p style="color:#868ba1" *ngIf="direccion_p">Direccion personal:</p>
+  <p style="color:darkcyan" *ngIf="direccion_p">{{direccion_p}}</p>
+  <br>
+  <p style="color:#868ba1" *ngIf="direccion_o">Direccion oficina:</p>
+  <p style="color:darkcyan" *ngIf="direccion_o">{{direccion_o}}</p>
+  <br>
+  <h5>Información de adicional</h5>
+  <br>
+  <p style="color:#868ba1">Grado de estudios:</p>
+  <p style="color:darkcyan" *ngIf="grado">{{grado}}</p>
+  <br>
+  <p style="color:#868ba1">Habilidades:</p>
+  <div>
+    <ion-badge color="medium" style="margin: 3px" *ngFor="let h of habilidades">{{h}}</ion-badge>
+  </div>
+</div>
 </ion-content>
+
