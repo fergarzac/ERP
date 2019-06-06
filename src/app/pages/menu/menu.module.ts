@@ -21,7 +21,16 @@ const routes: Routes = [
       { path: 'rh/agregar', loadChildren: '../rh/agregar/agregar.module#AgregarPageModule' },
       { path: 'rh/departamentos', loadChildren: '../rh/departamentos/departamentos.module#DepartamentosPageModule' },
       { path: 'rh/perfil', loadChildren: '../rh/perfil/perfil.module#PerfilPageModule' },
-      
+      { path: 'rh/documentos', loadChildren: '../rh/documentos/documentos.module#DocumentosPageModule' },
+      { path: 'rh/trabajosa', loadChildren: '../rh/trabajosa/trabajosa.module#TrabajosaPageModule' },
+      { path: 'rh/salud', loadChildren: '../rh/salud/salud.module#SaludPageModule' },
+      { path: 'rh/incidencias', loadChildren: '../rh/incidencias/incidencias.module#IncidenciasPageModule' },
+      { path: 'rh/modificar', loadChildren: '../rh/modificar/modificar.module#ModificarPageModule' },
+      { path: 'rh/addsalud', loadChildren: '../rh/addsalud/addsalud.module#AddsaludPageModule' },
+      { path: 'rh/addtrabajosa', loadChildren: '../rh/addtrabajosa/addtrabajosa.module#AddtrabajosaPageModule' },
+      { path: 'rh/addincidencias', loadChildren: '../rh/addincidencias/addincidencias.module#AddincidenciasPageModule' },
+      { path: 'rh/adddocumentos', loadChildren: '../rh/adddocumentos/adddocumentos.module#AdddocumentosPageModule' },
+
     ]
   },
   { path: '' , redirectTo: 'menu/perfil'}

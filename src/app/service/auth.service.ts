@@ -24,9 +24,8 @@ export class AuthService {
   }
 
   login(user: User): Observable<AuthResponse> {
-    return this.httpClient.get(this.AUTH_SERVER_ADDRESS + '/usuarios/login/?username='+user.nombre+"&contras="+user.password).pipe(
+    return this.httpClient.get(this.AUTH_SERVER_ADDRESS + '/usuarios/login/?correo='+user.nombre+"&contras="+user.password).pipe(
       tap(async (res: AuthResponse) => {
-        console.log(this.AUTH_SERVER_ADDRESS + '/usuarios/login/?username='+user.nombre+"&contras="+user.password);
         if (res.status == '1') {
           await this.storage.set(TOKEN_KEY, res.token);
           await this.storage.set(TIPO_KEY, res.rol);

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterEvent } from '@angular/router';
+import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'app-menu',
@@ -31,7 +32,7 @@ export class MenuPage implements OnInit {
   ];
 
   selectedPath = '';
-  constructor(private router: Router) { 
+  constructor(private router: Router, private authService: AuthService) { 
     this.router.events.subscribe((event: RouterEvent) => {
       this.selectedPath = event.url;
     });
@@ -45,5 +46,10 @@ export class MenuPage implements OnInit {
     }else{
       this.router.navigateByUrl('/menu/menu/usuarios/perfil');
     }
+  }
+
+  salir() {
+    this.authService.logout();
+    this.router.navigateByUrl('/');
   }
 }

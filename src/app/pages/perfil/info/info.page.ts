@@ -18,15 +18,23 @@ export class InfoPage implements OnInit {
   nombre_empresa: string = '';
   tipo: string = '';
   email: string = '';
+  descripcion: string = '';
+  telefono: string = '';
+  direccion: string = '';
+  sitio_web: string = '';
   constructor(private storage: Storage,private ptf:Platform,private httpClient: HttpClient,private  router:  Router,public alertController: AlertController) { }
 
-  ngOnInit() {
+  ngOnInit() { 
     this.storage.get(TOKEN_KEY).then((val) => {
       this.httpClient.get(this.AUTH_SERVER_ADDRESS + '/empresa/obtenerDatosEmpresa?id=80808541-7f22-11e9-a055-204747e63348').subscribe(data => {
         console.log(data);
         this.nombre_empresa = data['nombre'];
         this.tipo = data['giro'];
         this.email = data['correo'];
+        this.descripcion = data['descripcion'];
+        this.telefono = data['telefono'];
+        this.direccion = data['direccion'];
+        this.sitio_web = data['sitio_web'];
       }, err => {
         console.log(err);
       });
