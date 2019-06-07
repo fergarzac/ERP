@@ -1,12 +1,32 @@
 <ion-header>
   <ion-toolbar>
       <ion-buttons slot="start">
-          <ion-back-button></ion-back-button>
-        </ion-buttons>
+          <ion-button (click)="atras()">Atras</ion-button>
+      </ion-buttons>
     <ion-title>Agregar Salud</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+    <form>
+        <ion-item>
+          <ion-label position="floating">Nombre</ion-label>
+          <ion-input autocomplete="off" type="text" name="nombre" [(ngModel)]="nombre" required clearInput></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Tipo</ion-label>
+          <ion-input autocomplete="off"  name="password" [(ngModel)]="tipo" required clearInput></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">Condicion</ion-label>
+            <ion-input autocomplete="off"  name="condicion" [(ngModel)]="condicion" required clearInput></ion-input>
+          </ion-item>
+          <ion-item>
+              <ion-label position="floating">Observacion</ion-label>
+              <ion-input autocomplete="off" name="observacion" [(ngModel)]="Observacion" required clearInput></ion-input>
+            </ion-item>
+        <ion-button (click)="agregar()" expand="full" style="margin-top:10px">
+          Agregar
+        </ion-button>
+      </form>
 </ion-content>

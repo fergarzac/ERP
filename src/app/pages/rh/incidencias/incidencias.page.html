@@ -1,8 +1,8 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
+      <ion-buttons slot="start">
+          <ion-button (click)="atras()">Atras</ion-button>
+      </ion-buttons>
     <ion-title>incidencias</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -13,10 +13,10 @@
             <ion-card-content>
               <div style="width: 100%">
                 <div style="width: 100%;">
-                    <ion-card-title>{{incidencias.incidencia}}</ion-card-title>
+                    <ion-card-title>{{incidencias.incidencias}}</ion-card-title>
                     <ion-card-subtitle>{{incidencias.tipo}}</ion-card-subtitle>
-                    <ion-card-subtitle>{{incidencias.fecha}}</ion-card-subtitle>
-                    <ion-card-subtitle>{{incidencias.observaciones}}</ion-card-subtitle>
+                    <ion-card-subtitle *ngIf="incidencias.fecha">{{incidencias.fecha}}</ion-card-subtitle>
+                    <ion-card-subtitle *ngIf="incidencias.observaciones">{{incidencias.observaciones}}</ion-card-subtitle>
                 </div>
               </div>
             </ion-card-content>

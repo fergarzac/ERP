@@ -1,12 +1,36 @@
 <ion-header>
   <ion-toolbar>
       <ion-buttons slot="start">
-          <ion-back-button></ion-back-button>
-        </ion-buttons>
+          <ion-button (click)="atras()">Atras</ion-button>
+      </ion-buttons>
     <ion-title>Agregar Trabajo</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+    <form>
+        <ion-item>
+          <ion-label position="floating">Empresa</ion-label>
+          <ion-input autocomplete="off" type="text" name="empresa" [(ngModel)]="empresa" required clearInput></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Telefono</ion-label>
+          <ion-input autocomplete="off" type="tel"  name="telefono" [(ngModel)]="telefono" required clearInput></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Puesto</ion-label>
+          <ion-input autocomplete="off"  name="puesto" [(ngModel)]="puesto" required clearInput></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Fecha Ingreso</ion-label>
+          <ion-datetime display-format="DD-MM-YYYY" picker-format="DD-MM-YYYY" name="fechai" [(ngModel)]="fechai"></ion-datetime>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">Fecha Termino</ion-label>
+            <ion-datetime display-format="DD-MM-YYYY" picker-format="DD-MM-YYYY" name="fechat" [(ngModel)]="fechat"></ion-datetime>
+          </ion-item>
+        <ion-button (click)="agregar()" expand="full" style="margin-top:10px">
+          Agregar
+        </ion-button>
+      </form>
 </ion-content>

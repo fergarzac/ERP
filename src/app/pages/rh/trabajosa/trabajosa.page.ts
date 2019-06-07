@@ -15,34 +15,30 @@ const EMPRESA_KEY = 'EMPRESA_KEY';
 })
 export class TrabajosaPage implements OnInit {
   AUTH_SERVER_ADDRESS:  string  =  'http://localhost:8080';
-  listaIncidencias = [];
+  listaTrabajos = [];
   constructor(private ptf:Platform,private storage: Storage,private httpClient: HttpClient,private  router:  Router,) { }
   id: string = "";
   ngOnInit() {
     this.id = this.ptf.getQueryParam("id");
-    this.listaIncidencias = [
-      {
-        incidencia: 'Riña',
-        fecha: '11/03/2019',
-        tipo: 'Grave',
-        observaciones: 'algo'
-      },
-      {
-        incidencia: 'Gritos',
-        fecha: '11/03/2019',
-        tipo: 'Moderado',
-        observaciones: ''
-      },
-      {
-        incidencia: 'Rompio algo',
-        fecha: '',
-        tipo: 'Grave',
-        observaciones: ''
-      }
-    ]
+    this.id = this.ptf.getQueryParam("id");
+    this.storage.get(TOKEN_KEY).then((val) => {
+      this.httpClient.get(this.AUTH_SERVER_ADDRESS + '/usuarios/obtener-trabajos-anteriores?usuario='+this.id).subscribe(data => {
+        for (var clave in data) {
+          if (data.hasOwnProperty(clave)) {
+            this.listaTrabajos.push(data[clave]);
+          }
+        }
+        console.log(data);
+      }, err => {
+        console.log(err);
+      });
+    });
   }
 
   add(){
     this.router.navigateByUrl('menu/menu/rh/addtrabajosa?id='+this.id);
+  }
+  atras(){
+    this.router.navigateByUrl('menu/menu/rh/perfil?id='+this.id);
   }
 }

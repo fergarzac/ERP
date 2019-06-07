@@ -45,6 +45,6 @@ export class LoginPage implements OnInit {
       },onerror => {
         this.errorAlert();
       }
-    );
+    ); 
   }
 }

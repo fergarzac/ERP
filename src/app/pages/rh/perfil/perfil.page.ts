@@ -24,14 +24,13 @@ export class PerfilPage implements OnInit {
   direccion_o: string = '';
   grado: string = '';
   id: string = '';
-  habilidades = ['HTML', 'PHP'];
+  habilidades = [];
   constructor(public actionSheetController: ActionSheetController, private ptf:Platform,private storage: Storage, private httpClient: HttpClient,private  router:  Router,public alertController: AlertController) { }
 
   ngOnInit() {
     this.id = this.ptf.getQueryParam("id");
     this.storage.get(TOKEN_KEY).then((val) => {
       this.httpClient.get(this.AUTH_SERVER_ADDRESS + '/usuarios/perfil-usuario?id='+this.id).subscribe(data => {
-        console.log(data);
         this.nombre = data['nombre'] + ' '+ data['apellido_paterno']+ ' '+ data['apellido_materno'];
         this.puesto = data['puesto'];
         this.descripcion = data['descripcion'];
@@ -39,6 +38,16 @@ export class PerfilPage implements OnInit {
         this.direccion_p = data['direccion_casa'];
         this.direccion_o = data['direccion_oficina'];
         this.grado = data['grado_estudios'];
+      }, err => {
+        console.log(err);
+      });
+      this.httpClient.get(this.AUTH_SERVER_ADDRESS + '/usuarios/obtener-habilidades?usuario='+this.id).subscribe(data => {
+        for (var clave in data) {
+          if (data.hasOwnProperty(clave)) {
+            this.habilidades.push(data[clave].habilidad);
+          }
+        }
+        console.log(data);
       }, err => {
         console.log(err);
       });
@@ -81,5 +90,8 @@ export class PerfilPage implements OnInit {
       }]
     });
     await actionSheet.present();
+  }
+  atras(){
+    this.router.navigateByUrl('menu/menu/rh');
   }
 }

@@ -1,12 +1,32 @@
 <ion-header>
   <ion-toolbar>
       <ion-buttons slot="start">
-          <ion-back-button></ion-back-button>
-        </ion-buttons>
+          <ion-button (click)="atras()">Atras</ion-button>
+      </ion-buttons>
     <ion-title>Agregar Incidencia</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+    <form>
+        <ion-item>
+          <ion-label position="floating">Incidencia</ion-label>
+          <ion-input autocomplete="off" type="text" name="nombre" [(ngModel)]="incidencias" required clearInput></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Tipo</ion-label>
+          <ion-input autocomplete="off"  name="password" [(ngModel)]="tipo" required clearInput></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">Fecha</ion-label>
+            <ion-datetime display-format="DD-MM-YYYY" picker-format="DD-MM-YYYY" name="fecha" [(ngModel)]="fecha"></ion-datetime>
+          </ion-item>
+          <ion-item>
+              <ion-label position="floating">Descripcion</ion-label>
+              <ion-input autocomplete="off" name="descripcion" [(ngModel)]="descripcion" required clearInput></ion-input>
+            </ion-item>
+        <ion-button (click)="agregar()" expand="full" style="margin-top:10px">
+          Agregar
+        </ion-button>
+      </form>
 </ion-content>

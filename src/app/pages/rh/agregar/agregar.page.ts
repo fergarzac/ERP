@@ -60,4 +60,8 @@ export class AgregarPage implements OnInit {
     }
     
   }
+
+  atras(){
+    this.router.navigateByUrl('menu/menu/rh');
+  }
 }

@@ -14,35 +14,30 @@ const EMPRESA_KEY = 'EMPRESA_KEY';
   styleUrls: ['./salud.page.scss'],
 })
 export class SaludPage implements OnInit {
+  AUTH_SERVER_ADDRESS:  string  =  'http://localhost:8080';
   listaSalud = [];
   constructor(private ptf:Platform,private storage: Storage,private httpClient: HttpClient,private  router:  Router,) { }
   id: string = "";
   ngOnInit() {
     this.id = this.ptf.getQueryParam("id");
-    this.listaSalud = [
-      {
-        enfermedad: 'Alegia',
-        condicion: 'Controlada',
-        tipo: 'Benigna',
-        observaciones: 'algo'
-      },
-      {
-        enfermedad: 'Enfermedad 1',
-        condicion: 'Controlada',
-        tipo: 'Benigna',
-        observaciones: ''
-      },
-      {
-        enfermedad: 'Enfermedad 1',
-        condicion: 'Controlada',
-        tipo: 'Benigna',
-        observaciones: ''
-      }
-    ]
+    this.storage.get(TOKEN_KEY).then((val) => {
+      this.httpClient.get(this.AUTH_SERVER_ADDRESS + '/usuarios/obtener-salud-usuario?usuario='+this.id).subscribe(data => {
+        for (var clave in data) {
+          if (data.hasOwnProperty(clave)) {
+            this.listaSalud.push(data[clave]);
+          }
+        }
+        console.log(data);
+      }, err => {
+        console.log(err);
+      });
+    });
   }
 
   add(){
     this.router.navigateByUrl('menu/menu/rh/addsalud?id='+this.id);
   }
-
+  atras(){
+    this.router.navigateByUrl('menu/menu/rh/perfil?id='+this.id);
+  }
 }
