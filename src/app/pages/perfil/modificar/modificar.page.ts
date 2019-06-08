@@ -24,7 +24,25 @@ export class ModificarPage implements OnInit {
   direccion: string = '';
   sitio_web: string = '';
   constructor(private storage: Storage,private ptf:Platform,private httpClient: HttpClient,private  router:  Router,public alertController: AlertController) { }
+  async agregadoExitosa() {
+    const alert = await this.alertController.create({
+      header: 'Perfi',
+      message: 'Modificado exitosamente.',
+      buttons: ['Ok']
+    });
 
+    await alert.present();
+  }
+
+  async error() {
+    const alert = await this.alertController.create({
+      header: 'Perfil',
+      message: 'Error.',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
   ngOnInit() { 
     this.storage.get(TOKEN_KEY).then((val) => {
       this.httpClient.get(this.AUTH_SERVER_ADDRESS + '/empresa/obtenerDatosEmpresa?id=80808541-7f22-11e9-a055-204747e63348').subscribe(data => {
@@ -41,5 +59,18 @@ export class ModificarPage implements OnInit {
       });
   });
   }
-
+  modificar(){
+    this.storage.get(EMPRESA_KEY).then((val) => {
+      this.httpClient.get(this.AUTH_SERVER_ADDRESS + '/empresa/dao-perfil-empresa?direccion='+
+      this.direccion+'&telefono='+this.telefono+'&sitio_web='+this.sitio_web+'&descripcion='+this.descripcion+'&id='+val).subscribe(data => {
+        if(data["status"]=="1"){
+          this.agregadoExitosa();
+        }else{
+          this.error();
+        }
+      }, err => {
+        console.log(err);
+      });
+    });
+  }
 }

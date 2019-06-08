@@ -1,12 +1,77 @@
 <ion-header>
   <ion-toolbar>
-      <ion-buttons slot="start">
-          <ion-back-button></ion-back-button>
-        </ion-buttons>
-    <ion-title>modificar</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="atras()">Atras</ion-button>
+    </ion-buttons>
+    <ion-title>Modificar</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <form>
+    <ion-item>
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input autocomplete="off" type="text" name="nombre" [(ngModel)]="nombre" required clearInput></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Apellido Paterno</ion-label>
+      <ion-input autocomplete="off" name="apellido_p" [(ngModel)]="apellido_p" required clearInput></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Apellido Materno</ion-label>
+      <ion-input autocomplete="off"  name="apellido_m" [(ngModel)]="apellido_m" required clearInput></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Fecha Nacimiento</ion-label>
+      <ion-datetime display-format="DD-MM-YYYY" picker-format="DD-MM-YYYY" name="fechan" [(ngModel)]="fechan"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>Sexo</ion-label>
+      <ion-select name="sexo" [(ngModel)]="sexo" okText="Okay" cancelText="Cancelar">
+        <ion-select-option value="masculino">Masculino</ion-select-option>
+        <ion-select-option value="femenino">Femenino</ion-select-option>
+        <ion-select-option value="otro">Otro</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+        <ion-label position="floating">Fecha Ingreso</ion-label>
+        <ion-datetime display-format="DD-MM-YYYY" picker-format="DD-MM-YYYY" name="fechai" [(ngModel)]="fechai"></ion-datetime>
+      </ion-item>
+    <ion-item>
+      <ion-label position="floating">Curp</ion-label>
+      <ion-input autocomplete="off" name="curp" [(ngModel)]="curp"  clearInput></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">RFC</ion-label>
+      <ion-input autocomplete="off" name="rfc" [(ngModel)]="rfc"  clearInput></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">NSS</ion-label>
+      <ion-input autocomplete="off" name="nss" [(ngModel)]="nss" clearInput></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Direccion Casa</ion-label>
+      <ion-input autocomplete="off" name="dir_casa" [(ngModel)]="dir_casa" clearInput></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Direccion Oficina</ion-label>
+      <ion-input autocomplete="off" name="dir_oficina" [(ngModel)]="dir_oficina" clearInput></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Grado de Estudios</ion-label>
+      <ion-input autocomplete="off" name="estudios" [(ngModel)]="estudios" clearInput></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Puesto</ion-label>
+      <ion-input autocomplete="off" name="puesto" [(ngModel)]="puesto" clearInput></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Telefono</ion-label>
+      <ion-input autocomplete="off" type="tel" name="telefono" [(ngModel)]="telefono" clearInput></ion-input>
+    </ion-item>
+    
+    <ion-button (click)="modificar()" expand="full" style="margin-top:10px">
+      Modificar
+    </ion-button>
+  </form>
 </ion-content>

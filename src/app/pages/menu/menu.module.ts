@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
+import { IonicStorageModule } from '@ionic/storage';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -14,6 +15,7 @@ const routes: Routes = [
     children: [
       { path: 'home', loadChildren: '../home/dashboard/dashboard.module#DashboardPageModule' },
       { path: 'perfil', loadChildren: '../perfil/index/index.module#IndexPageModule' },
+      { path: 'perfil-usuario', loadChildren: '../usuarios/perfil/perfil.module#PerfilPageModule' },
       { path: 'rh', loadChildren: '../rh/index/index.module#IndexPageModule' },
       { path: 'activos', loadChildren: '../activos/index/index.module#IndexPageModule' },
       { path: 'viaticos', loadChildren: '../viaticos/index/index.module#IndexPageModule' },
@@ -30,7 +32,9 @@ const routes: Routes = [
       { path: 'rh/addtrabajosa', loadChildren: '../rh/addtrabajosa/addtrabajosa.module#AddtrabajosaPageModule' },
       { path: 'rh/addincidencias', loadChildren: '../rh/addincidencias/addincidencias.module#AddincidenciasPageModule' },
       { path: 'rh/adddocumentos', loadChildren: '../rh/adddocumentos/adddocumentos.module#AdddocumentosPageModule' },
-
+      { path: 'activos/add', loadChildren: '../activos/add/add.module#AddPageModule' },
+      { path: 'activos/mantenimiento', loadChildren: '../activos/mantenimiento/mantenimiento.module#MantenimientoPageModule' },
+  
     ]
   },
   { path: '' , redirectTo: 'menu/perfil'}

@@ -38,6 +38,6 @@ export class IncidenciasPage implements OnInit {
     this.router.navigateByUrl('menu/menu/rh/addincidencias?id='+this.id);
   }
   atras(){
-    this.router.navigateByUrl('menu/menu/rh/incidencias?id='+this.id);
+    this.router.navigateByUrl('menu/menu/rh/perfil?id='+this.id);
   }
 }

@@ -1,5 +1,5 @@
 export interface AuthResponse {
-    iduser: number,
+    id_usuario: number,
     status: string,
     token: string,
     rol: string,

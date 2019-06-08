@@ -23,6 +23,7 @@ export class PerfilPage implements OnInit {
   direccion_p: string = '1352 Science Center Drive Terreton, ID 83450';
   direccion_o: string = '';
   grado: string = '';
+  email: string = '';
   id: string = '';
   habilidades = [];
   constructor(public actionSheetController: ActionSheetController, private ptf:Platform,private storage: Storage, private httpClient: HttpClient,private  router:  Router,public alertController: AlertController) { }
@@ -38,6 +39,7 @@ export class PerfilPage implements OnInit {
         this.direccion_p = data['direccion_casa'];
         this.direccion_o = data['direccion_oficina'];
         this.grado = data['grado_estudios'];
+        this.email = data['email'];
       }, err => {
         console.log(err);
       });
@@ -57,6 +59,12 @@ export class PerfilPage implements OnInit {
     const actionSheet = await this.actionSheetController.create({
       header: 'Acciones',
       buttons: [{
+        text: 'Modificar',
+        icon: 'create',
+        handler: () => {
+          this.router.navigateByUrl('menu/menu/rh/modificar?id='+this.id);
+        }
+      },{
         text: 'Documentos',
         icon: 'document',
         handler: () => {

@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-button (click)="atras()">Atras</ion-button>
+      </ion-buttons>
+    <ion-title>Agregar Activo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <form>
+        <ion-item>
+          <ion-label position="floating">Activo</ion-label>
+          <ion-input autocomplete="off" type="text" name="nombre" [(ngModel)]="nombre" required clearInput></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Serie</ion-label>
+          <ion-input autocomplete="off"  name="Serie" [(ngModel)]="serie" required clearInput></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">Departamento</ion-label>
+            <ion-input autocomplete="off"  name="departamento" [(ngModel)]="departamento" clearInput></ion-input>
+          </ion-item>
+          <ion-item>
+              <ion-label position="floating">Cantidad</ion-label>
+              <ion-input autocomplete="off" type="number" name="cantidad" [(ngModel)]="cantidad" clearInput></ion-input>
+            </ion-item>
+        <ion-button (click)="agregar()" expand="full" style="margin-top:10px">
+          Agregar
+        </ion-button>
+      </form>
+</ion-content>

@@ -7,6 +7,7 @@ import { HttpClient } from  '@angular/common/http';
 import { tap } from  'rxjs/operators';
 import { Storage } from '@ionic/storage';
 const TOKEN_KEY = 'ACCESS_TOKEN';
+const ID_KEY = 'ID_TOKEN';
 const TIPO_KEY = 'TIPO_ACCESS';
 const EMPRESA_KEY = 'EMPRESA_KEY';
 @Injectable({
@@ -28,6 +29,7 @@ export class AuthService {
       tap(async (res: AuthResponse) => {
         if (res.status == '1') {
           await this.storage.set(TOKEN_KEY, res.token);
+          await this.storage.set(ID_KEY, res.id_usuario);
           await this.storage.set(TIPO_KEY, res.rol);
           await this.storage.set(EMPRESA_KEY, res.id_empresa);
           this.authstate.next(true);
