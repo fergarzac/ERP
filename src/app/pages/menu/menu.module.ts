@@ -34,7 +34,13 @@ const routes: Routes = [
       { path: 'rh/adddocumentos', loadChildren: '../rh/adddocumentos/adddocumentos.module#AdddocumentosPageModule' },
       { path: 'activos/add', loadChildren: '../activos/add/add.module#AddPageModule' },
       { path: 'activos/mantenimiento', loadChildren: '../activos/mantenimiento/mantenimiento.module#MantenimientoPageModule' },
-  
+      { path: 'activos/listam', loadChildren: '../activos/listam/listam.module#ListamPageModule' },
+      { path: 'activo/documento', loadChildren: '../activos/documento/documento.module#DocumentoPageModule' },
+      { path: 'viaticos/usuario', loadChildren: '../viaticos/usuario/usuario.module#UsuarioPageModule' },
+      { path: 'viaticos/gastos', loadChildren: '../viaticos/gastos/gastos.module#GastosPageModule' },
+      { path: 'viaticos/documento', loadChildren: '../viaticos/documento/documento.module#DocumentoPageModule' },
+      { path: 'viaticos/add', loadChildren: '../viaticos/add/add.module#AddPageModule' },
+      { path: 'viaticos/modificar', loadChildren: '../viaticos/modificar/modificar.module#ModificarPageModule' },
     ]
   },
   { path: '' , redirectTo: 'menu/perfil'}

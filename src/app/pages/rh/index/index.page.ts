@@ -24,19 +24,7 @@ export class IndexPage implements OnInit {
   constructor(private storage: Storage,private httpClient: HttpClient,private  router:  Router,public alertController: AlertController) { }
 
   ngOnInit() {
-    this.storage.get(TOKEN_KEY).then((val) => {
-      this.httpClient.get(this.AUTH_SERVER_ADDRESS + '/usuarios/obtenerUsuariosTodos?id=80808541-7f22-11e9-a055-204747e63348').subscribe(data => {
-        console.log(data);
-        for(var clave in data) {
-          if(data.hasOwnProperty(clave)){
-            this.listaTrabajadores.push(data[clave]);
-          }
-        }
-        //this.listaTrabajadores = data;
-      }, err => {
-        console.log(err);
-      });
-  });
+    this.search();
   }
 
   showBusqueda(){
@@ -60,5 +48,43 @@ export class IndexPage implements OnInit {
 
   perfilUsuario(id){
     this.router.navigateByUrl('menu/menu/rh/perfil?id='+id);
+  }
+
+  search(){
+    this.storage.get(EMPRESA_KEY).then((val) => {
+      this.httpClient.get(this.AUTH_SERVER_ADDRESS + '/usuarios/obtenerUsuariosTodos?id='+val).subscribe(data => {
+        console.log(data);
+        for(var clave in data) {
+          if(data.hasOwnProperty(clave)){
+            this.listaTrabajadores.push(data[clave]);
+          }
+        }
+        //this.listaTrabajadores = data;
+      }, err => {
+        console.log(err);
+      });
+    });
+  }
+
+  buscar(){
+    this.listaTrabajadores = [];
+    console.log(this.trabajador);
+    if(this.trabajador.length>0){
+      this.storage.get(EMPRESA_KEY).then((val) => {
+        this.httpClient.get(this.AUTH_SERVER_ADDRESS + '/usuarios/obtenerUsuarios?id='+val+"&usuario="+this.trabajador).subscribe(data => {
+          console.log(data);
+          for(var clave in data) {
+            if(data.hasOwnProperty(clave)){
+              this.listaTrabajadores.push(data[clave]);
+            }
+          }
+          //this.listaTrabajadores = data;
+        }, err => {
+          console.log(err);
+        });
+      });
+    }else{
+      this.search();
+    }
   }
 }

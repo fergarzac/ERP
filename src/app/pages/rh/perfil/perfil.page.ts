@@ -26,6 +26,7 @@ export class PerfilPage implements OnInit {
   email: string = '';
   id: string = '';
   habilidades = [];
+  atrasBtn: boolean =true;
   constructor(public actionSheetController: ActionSheetController, private ptf:Platform,private storage: Storage, private httpClient: HttpClient,private  router:  Router,public alertController: AlertController) { }
 
   ngOnInit() {
@@ -53,6 +54,11 @@ export class PerfilPage implements OnInit {
       }, err => {
         console.log(err);
       });
+    });
+    this.storage.get(TIPO_KEY).then((val) => {
+      if(val == "3"){
+        this.atrasBtn = false;
+      }
     });
   }
   async presentActionSheet() {

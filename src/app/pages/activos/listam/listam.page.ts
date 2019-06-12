@@ -9,44 +9,38 @@ const TOKEN_KEY = 'ACCESS_TOKEN';
 const TIPO_KEY = 'TIPO_ACCESS';
 const EMPRESA_KEY = 'EMPRESA_KEY';
 @Component({
-  selector: 'app-index',
-  templateUrl: './index.page.html',
-  styleUrls: ['./index.page.scss'],
+  selector: 'app-listam',
+  templateUrl: './listam.page.html',
+  styleUrls: ['./listam.page.scss'],
 })
-export class IndexPage implements OnInit {
-
+export class ListamPage implements OnInit {
   busqueda: boolean = false;
   activos = '';
   departamento = '';
-  listaViaticos = [];
+  listaMantenimientos = [];
   id: string = '';
   AUTH_SERVER_ADDRESS:  string  =  'http://localhost:8080';
   constructor(private ptf:Platform,private storage: Storage,private httpClient: HttpClient,private  router:  Router,public alertController: AlertController) { }
 
   ngOnInit() {
-    this.storage.get(EMPRESA_KEY).then((val) => {
-      this.id = this.ptf.getQueryParam("id");
-      this.httpClient.get(this.AUTH_SERVER_ADDRESS + '/empresa/obtener-viaticos?id='+val).subscribe(data => {
-        console.log(data);
-        for(var clave in data) {
-          if(data.hasOwnProperty(clave)){
-            this.listaViaticos.push(data[clave]);
-          }
+    this.id = this.ptf.getQueryParam("id");
+    this.httpClient.get(this.AUTH_SERVER_ADDRESS + '/empresa/obtener-mantenimientos?id='+this.id).subscribe(data => {
+      console.log(data);
+      for(var clave in data) {
+        if(data.hasOwnProperty(clave)){
+          this.listaMantenimientos.push(data[clave]);
         }
-      }, err => {
-        console.log(err);
-      });
+      }
+    }, err => {
+      console.log(err);
     });
+
   }
   showBusqueda(){
     this.busqueda = !this.busqueda;
   }
-  verViaticos(id){
-    this.router.navigateByUrl('menu/menu/viaticos/gastos?id='+this.id);
-  }
-
-  agregarViaticos(id){
-    this.router.navigateByUrl('menu/menu/viaticos/add');
+  agregarMantenimiento(){
+    this.router.navigateByUrl('menu/menu/activos/mantenimiento?id='+this.id);
   }
 
   eliminar(id){
@@ -54,6 +48,6 @@ export class IndexPage implements OnInit {
   }
 
   atras(){
-    this.router.navigateByUrl('menu/menu/viaticos');
+    this.router.navigateByUrl('menu/menu/activos');
   }
 }

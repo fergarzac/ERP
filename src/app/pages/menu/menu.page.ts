@@ -27,11 +27,6 @@ export class MenuPage implements OnInit {
       'icon': 'clipboard',
       'title': 'Viaticos',
       'url': '/menu/menu/viaticos'
-    },
-    {
-      'icon': 'car',
-      'title': 'Flotilla',
-      'url': '/menu/menu/flotilla'
     }
   ];
 

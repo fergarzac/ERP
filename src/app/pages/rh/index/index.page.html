@@ -13,8 +13,8 @@
   <ion-content>
       
       <ion-row *ngIf="busqueda" style="background:hsl(215, 32%, 22%);color:#fff">
-          <ion-searchbar placeholder="Trabajador" (ionChange)="buscarTrabajador()" [(ngModel)]="trabajador"></ion-searchbar>
-          <ion-searchbar placeholder="Departamento" (ionChange)="buscarDepartamento()" [(ngModel)]="departamento"></ion-searchbar>
+          <ion-searchbar placeholder="Trabajador" (ionChange)="buscar()" [(ngModel)]="trabajador"></ion-searchbar>
+          <ion-searchbar placeholder="Departamento" (ionChange)="buscar()" [(ngModel)]="departamento"></ion-searchbar>
       </ion-row>
       <div style="width: 100%">
           <ion-card *ngFor="let trabajador of listaTrabajadores" (click) = 'perfilUsuario(trabajador.id)'>

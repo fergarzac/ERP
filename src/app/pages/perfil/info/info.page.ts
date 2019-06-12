@@ -25,8 +25,8 @@ export class InfoPage implements OnInit {
   constructor(private storage: Storage,private ptf:Platform,private httpClient: HttpClient,private  router:  Router,public alertController: AlertController) { }
 
   ngOnInit() { 
-    this.storage.get(TOKEN_KEY).then((val) => {
-      this.httpClient.get(this.AUTH_SERVER_ADDRESS + '/empresa/obtenerDatosEmpresa?id=80808541-7f22-11e9-a055-204747e63348').subscribe(data => {
+    this.storage.get(EMPRESA_KEY).then((val) => {
+      this.httpClient.get(this.AUTH_SERVER_ADDRESS + '/empresa/obtenerDatosEmpresa?id='+val).subscribe(data => {
         console.log(data);
         this.nombre_empresa = data['nombre'];
         this.tipo = data['giro'];

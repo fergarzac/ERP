@@ -38,7 +38,11 @@ export class LoginPage implements OnInit {
       console.log(res);
       if (res.status == '1') {
         form.reset();
-        this.router.navigateByUrl('menu');
+        if(res.rol == '1'){
+          this.router.navigateByUrl('menu');
+        }else{
+          this.router.navigateByUrl('menu/menu/rh/perfil?id='+res.id_usuario);
+        }
       }else{
         this.presentAlert();
       }

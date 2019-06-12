@@ -50,7 +50,7 @@ export class AgregarPage implements OnInit {
         if (res.status == '1') {
           form.reset();
           this.presentAlert1();
-          this.router.navigateByUrl('login');
+          this.router.navigateByUrl('menu/menu/rh');
         }else{
           this.presentAlert();
         }

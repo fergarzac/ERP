@@ -3,10 +3,34 @@
       <ion-buttons slot="start">
           <ion-menu-button></ion-menu-button>
         </ion-buttons>
-    <ion-title>index</ion-title>
+    <ion-title>Viaticos</ion-title>
+    <ion-buttons slot="end">
+        <ion-button (click) = 'showBusqueda()'><ion-icon name="search"></ion-icon></ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-row *ngIf="busqueda" style="background:hsl(215, 32%, 22%);color:#fff">
+    <ion-searchbar placeholder="Viaticos" (ionChange)="buscar()" [(ngModel)]="viaticos"></ion-searchbar>
+    <ion-searchbar placeholder="Trabajador" (ionChange)="buscar()" [(ngModel)]="trabajador"></ion-searchbar>
+</ion-row>
+<div style="width: 100%">
+    <ion-card *ngFor="let viaticos of listaViaticos" (click) = 'verViaticos(viaticos.idviaticos)'>
+        <ion-card-content>
+          <div style="width: 100%">
+            <div style="width: 100%">
+                <ion-card-title>{{viaticos.concepto}}</ion-card-title>
+                <ion-card-subtitle>{{viaticos.cantidad}}</ion-card-subtitle>
+                <ion-card-subtitle>{{viaticos.usuario}}</ion-card-subtitle>
+            </div>
+          </div>
+        </ion-card-content>
+    </ion-card>
+</div>
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button (click) = 'agregarViaticos()'>
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
 </ion-content>

@@ -41,4 +41,10 @@ export class IndexPage implements OnInit {
   agregarActivo(){
     this.router.navigateByUrl('menu/menu/activos/add');
   }
+  mantenimiento(id){
+    this.router.navigateByUrl('menu/menu/activos/listam?id='+id);
+  }
+  eliminar(id){
+
+  }
 }

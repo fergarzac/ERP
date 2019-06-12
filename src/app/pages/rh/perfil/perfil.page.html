@@ -1,8 +1,11 @@
 <ion-header>
   <ion-toolbar>
-      <ion-buttons slot="start">
+      <ion-buttons *ngIf="atrasBtn" slot="start">
           <ion-button (click)="atras()">Atras</ion-button>
       </ion-buttons>
+      <ion-buttons *ngIf="!atrasBtn" slot="start">
+        <ion-menu-button></ion-menu-button>
+    </ion-buttons>
     <ion-title>Perfil Trabajador</ion-title>
       <ion-buttons slot="end">
         <ion-button color="secondary" (click) = "presentActionSheet()">

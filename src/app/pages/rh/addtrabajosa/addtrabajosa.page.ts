@@ -78,5 +78,5 @@ export class AddtrabajosaPage implements OnInit {
     var day = ((di.getDate())+"").length < 2 ? "0"+(di.getDate()) : (di.getDate());
     var year = di.getFullYear();
     return year+"/"+month+"/"+day;
-  }
+  } 
 }
