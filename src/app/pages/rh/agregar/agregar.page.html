@@ -34,6 +34,13 @@
             <ion-label position="floating">Repite la Contraseña</ion-label>
             <ion-input autocomplete="off" type="password" name="password2" ngModel required clearInput></ion-input>
           </ion-item>
+          <ion-item *ngIf="admin">
+            <ion-select placeholder="Selecciona tipo"  name="tipo" [(ngModel)]="tipo">
+              <ion-select-option value="2">Admin</ion-select-option>
+              <ion-select-option value="3">Trabajador</ion-select-option>
+            </ion-select>
+          </ion-item>
+          
         <ion-button type="submit" expand="full" style="margin-top:10px">
           Registrar
         </ion-button>

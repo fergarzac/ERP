@@ -41,6 +41,8 @@ const routes: Routes = [
       { path: 'viaticos/documento', loadChildren: '../viaticos/documento/documento.module#DocumentoPageModule' },
       { path: 'viaticos/add', loadChildren: '../viaticos/add/add.module#AddPageModule' },
       { path: 'viaticos/modificar', loadChildren: '../viaticos/modificar/modificar.module#ModificarPageModule' },
+      { path: 'viaticos/addgastos', loadChildren: '../viaticos/addgastos/addgastos.module#AddgastosPageModule' },
+ 
     ]
   },
   { path: '' , redirectTo: 'menu/perfil'}

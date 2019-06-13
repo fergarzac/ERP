@@ -9,45 +9,24 @@ const TOKEN_KEY = 'ACCESS_TOKEN';
 const TIPO_KEY = 'TIPO_ACCESS';
 const EMPRESA_KEY = 'EMPRESA_KEY';
 @Component({
-  selector: 'app-add',
-  templateUrl: './add.page.html',
-  styleUrls: ['./add.page.scss'],
+  selector: 'app-addgastos',
+  templateUrl: './addgastos.page.html',
+  styleUrls: ['./addgastos.page.scss'],
 })
-export class AddPage implements OnInit {
-  concepto = '';
-  cantidad = '';
-  trabajador = '';
-  buttonColor:string ="#fff";
-  listaTrabajadores = [];
-  selected_id: string = '';
+export class AddgastosPage implements OnInit {
+  busqueda: boolean = false;
+  nota = '';
+  cantidad: '';
+  id: string = '';
   AUTH_SERVER_ADDRESS:  string  =  'http://localhost:8080';
   constructor(private ptf:Platform,private storage: Storage,private httpClient: HttpClient,private  router:  Router,public alertController: AlertController) { }
 
-
   ngOnInit() {
-  }
-
-  buscar(){
-    this.listaTrabajadores = [];
-    this.httpClient.get(this.AUTH_SERVER_ADDRESS + '/usuarios/obtener-usuario?id='+this.trabajador).subscribe(data => {
-      for(var clave in data) {
-        if(data.hasOwnProperty(clave)){
-          this.listaTrabajadores.push(data[clave]);
-        }
-      }
-    }, err => {
-      console.log(err);
-    });
-  }
-
-  seleccionar(id){
-    this.buttonColor = "#cecece";
-    this.selected_id = id;
+    this.id = this.ptf.getQueryParam("id");
   }
 
   agregar(){
-    this.storage.get(EMPRESA_KEY).then((val) => {
-      this.httpClient.get(this.AUTH_SERVER_ADDRESS + '/empresa/agregar-viaticos?empresa='+val+'&concepto='+this.concepto+'&cantidad='+this.cantidad+"&id="+this.selected_id).subscribe(data => {
+      this.httpClient.get(this.AUTH_SERVER_ADDRESS + '/usuarios/agregar-gastos?nota='+this.nota+'&cantidad='+this.cantidad+"&id="+this.id).subscribe(data => {
         if(data["status"]=="1"){
           this.agregadoExitosa();
         }else{
@@ -56,10 +35,9 @@ export class AddPage implements OnInit {
       }, err => {
         console.log(err);
       });
-    });
   }
   atras(){
-    this.router.navigateByUrl('menu/menu/viaticos');
+    this.router.navigateByUrl('menu/menu/viaticos/gastos?id='+this.id);
   }
 
   async agregadoExitosa() {
@@ -71,7 +49,7 @@ export class AddPage implements OnInit {
         role: 'ok',
         cssClass: 'primary',
         handler: (blah) => {
-          this.router.navigateByUrl('menu/menu/viaticos');
+          this.router.navigateByUrl('menu/menu/viaticos/gastos?id'+this.id);
         }
       }]
     });

@@ -11,14 +11,14 @@
     <form>
         <ion-item>
             <ion-label position="floating">Trabajador</ion-label>
-            <ion-input autocomplete="off" (keyup)="buscar()" name="trabajador" [(ngModel)]="trabajador" clearInput></ion-input>
+            <ion-input autocomplete="off" (ionChange)="buscar()" name="trabajador" [(ngModel)]="trabajador" clearInput></ion-input>
           </ion-item>
         <ion-card *ngFor="let trabajador of listaTrabajadores" [style.background]="buttonColor" (click) = 'seleccionar(trabajador.token)'>
               <ion-card-content>
                 <div style="width: 100%">
                   <div style="width: 100%">
                       <ion-card-title>{{trabajador.nombre}} {{trabajador.apellido_paterno}} {{trabajador.apellido_materno}}</ion-card-title>
-                  </div>
+                  </div> 
                 </div>
               </ion-card-content>
           </ion-card>
