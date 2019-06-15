@@ -6,6 +6,8 @@ import { AuthResponse } from '../auth/auth-response';
 import { HttpClient } from  '@angular/common/http';
 import { tap } from  'rxjs/operators';
 import { Storage } from '@ionic/storage';
+import { ConstantesService } from '../constantes.service';
+
 const TOKEN_KEY = 'ACCESS_TOKEN';
 const ID_KEY = 'ID_TOKEN';
 const TIPO_KEY = 'TIPO_ACCESS';
@@ -18,16 +20,18 @@ const EMPRESA_KEY = 'EMPRESA_KEY';
 
 
 export class AuthService {
-  AUTH_SERVER_ADDRESS:  string  =  'http://localhost:8080';
+  AUTH_SERVER_ADDRESS:  string  =  '';
   authstate = new BehaviorSubject(false);
-  constructor(private storage: Storage,private plt: Platform, private httpClient: HttpClient) {
+
+  constructor(private constService: ConstantesService,private storage: Storage,private plt: Platform, private httpClient: HttpClient) {
     this.plt.ready().then(() => {
       this.checkToken();
     });
   }
 
   login(user: User): Observable<AuthResponse> {
-    return this.httpClient.get(this.AUTH_SERVER_ADDRESS + '/usuarios/login/?correo='+user.nombre+"&contras="+user.password).pipe(
+    console.log(this.constService.getApi() + '/usuarios/login/?correo='+user.nombre+"&contras="+user.password);
+    return this.httpClient.get(this.constService.getApi() + '/usuarios/login/?correo='+user.nombre+"&contras="+user.password).pipe(
       tap(async (res: AuthResponse) => {
         if (res.status == '1') {
           await this.storage.set(TOKEN_KEY, res.token);

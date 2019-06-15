@@ -3,6 +3,7 @@ import { HttpClient } from  '@angular/common/http';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
+import { ConstantesService } from 'src/app/constantes.service';
 
 const TOKEN_KEY = 'ACCESS_TOKEN';
 const TIPO_KEY = 'TIPO_ACCESS';
@@ -13,8 +14,7 @@ const EMPRESA_KEY = 'EMPRESA_KEY';
   styleUrls: ['./add.page.scss'],
 })
 export class AddPage implements OnInit {
-  AUTH_SERVER_ADDRESS:  string  =  'http://localhost:8080';
-  constructor(private storage: Storage,private httpClient: HttpClient,private  router:  Router,public alertController: AlertController) { }
+  constructor(private constService: ConstantesService,private storage: Storage,private httpClient: HttpClient,private  router:  Router,public alertController: AlertController) { }
   nombre: string="";
   departamento: string="";
   serie:string="";
@@ -49,9 +49,10 @@ export class AddPage implements OnInit {
   }
   agregar(){
     this.storage.get(EMPRESA_KEY).then((val) => {
-      this.httpClient.get(this.AUTH_SERVER_ADDRESS + '/empresa/agregar-activo?id='+val+"&nombre="+this.nombre+"&serie="+this.serie+"&cantidad="+this.cantidad+"&departamento="+this.departamento).subscribe(data => {
+      console.log(this.constService.getApi() + '/empresa/agregar-activo?id='+val+"&nombre="+this.nombre+"&serie="+this.serie+"&cantidad="+this.cantidad+"&departamento="+this.departamento);
+      this.httpClient.get(this.constService.getApi() + '/empresa/agregar-activo?id='+val+"&nombre="+this.nombre+"&serie="+this.serie+"&cantidad="+this.cantidad+"&departamento="+this.departamento).subscribe(data => {
         if(data['status'] == "1"){
-          // this.agregadoExitosa();
+          this.agregadoExitosa();
         }else{
           this.error();
         }

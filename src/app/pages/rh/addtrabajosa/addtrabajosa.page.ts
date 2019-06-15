@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { Platform } from '@ionic/angular';
+import { ConstantesService } from 'src/app/constantes.service';
 
 const TOKEN_KEY = 'ACCESS_TOKEN';
 const TIPO_KEY = 'TIPO_ACCESS';
@@ -14,14 +15,13 @@ const EMPRESA_KEY = 'EMPRESA_KEY';
   styleUrls: ['./addtrabajosa.page.scss'],
 })
 export class AddtrabajosaPage implements OnInit {
-  AUTH_SERVER_ADDRESS:  string  =  'http://localhost:8080';
   id: string = "";
   empresa: string ="";
   telefono: string ="";
   puesto: string="";
   fechai:string="";
   fechat:string="";
-  constructor(private ptf:Platform,private storage: Storage,private httpClient: HttpClient,private  router:  Router,public alertController: AlertController) { }
+  constructor(private constService: ConstantesService,private ptf:Platform,private storage: Storage,private httpClient: HttpClient,private  router:  Router,public alertController: AlertController) { }
   async agregadoExitosa() {
     const alert = await this.alertController.create({
       header: 'Trabajos Anteriores',
@@ -49,13 +49,16 @@ export class AddtrabajosaPage implements OnInit {
     await alert.present();
   }
   ngOnInit() {
+    
+  }
+  ionViewDidEnter() {
     this.id = this.ptf.getQueryParam("id");
   }
   agregar(){
     this.storage.get(TOKEN_KEY).then((val) => {
       this.fechai = this.formatDates(this.fechai);
       this.fechat = this.formatDates(this.fechat);
-      this.httpClient.get(this.AUTH_SERVER_ADDRESS + '/usuarios/agregar-trabajo-anterior?trabajo='+
+      this.httpClient.get(this.constService.getApi() + '/usuarios/agregar-trabajo-anterior?trabajo='+
       this.empresa+'&telefono='+this.telefono+'&puesto='+this.puesto+'&fechaTermino='+this.fechat
       +'&fechaIngreso='+this.fechai+'&usuario='+this.id).subscribe(data => {
         if(data["status"]=="1"){

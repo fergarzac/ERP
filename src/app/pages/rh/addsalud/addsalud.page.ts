@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { Platform } from '@ionic/angular';
+import { ConstantesService } from 'src/app/constantes.service';
 
 const TOKEN_KEY = 'ACCESS_TOKEN';
 const TIPO_KEY = 'TIPO_ACCESS';
@@ -15,13 +16,12 @@ const EMPRESA_KEY = 'EMPRESA_KEY';
   styleUrls: ['./addsalud.page.scss'],
 })
 export class AddsaludPage implements OnInit {
-  AUTH_SERVER_ADDRESS:  string  =  'http://localhost:8080';
   nombre: string ="";
   tipo: string ="";
   condicion: string="";
   observacion:string="";
   id: string ="";
-  constructor(private ptf:Platform,private storage: Storage,private httpClient: HttpClient,private  router:  Router,public alertController: AlertController) { }
+  constructor(private constService: ConstantesService,private ptf:Platform,private storage: Storage,private httpClient: HttpClient,private  router:  Router,public alertController: AlertController) { }
   async agregadoExitosa() {
     const alert = await this.alertController.create({
       header: 'Trabajos Anteriores',
@@ -49,12 +49,13 @@ export class AddsaludPage implements OnInit {
     await alert.present();
   }
   ngOnInit() {
+  }
+  ionViewDidEnter() {
     this.id = this.ptf.getQueryParam("id");
   }
-
   agregar(){
     this.storage.get(TOKEN_KEY).then((val) => {
-      this.httpClient.get(this.AUTH_SERVER_ADDRESS + '/usuarios/agregar-expediente-salud?enfermedad='+
+      this.httpClient.get(this.constService.getApi() + '/usuarios/agregar-expediente-salud?enfermedad='+
       this.nombre+'&tipo='+this.tipo+'&condicion='+this.condicion+'&observaciones='+this.observacion
       +'&usuario='+this.id).subscribe(data => {
         if(data["status"]=="1"){

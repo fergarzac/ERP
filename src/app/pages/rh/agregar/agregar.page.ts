@@ -5,6 +5,7 @@ import { AlertController } from '@ionic/angular';
 import { HttpClient } from  '@angular/common/http';
 import { Storage } from '@ionic/storage';
 import { Platform } from '@ionic/angular';
+import { ConstantesService } from 'src/app/constantes.service';
 
 const TIPO_KEY = 'TIPO_ACCESS';
 const EMPRESA_KEY = 'EMPRESA_KEY';
@@ -14,13 +15,14 @@ const EMPRESA_KEY = 'EMPRESA_KEY';
   styleUrls: ['./agregar.page.scss'],
 })
 export class AgregarPage implements OnInit {
-
-  AUTH_SERVER_ADDRESS:  string  =  'http://localhost:8080';
   tipo = "3";
   admin: boolean = true;
-  constructor(private ptf:Platform,private storage: Storage,private httpClient: HttpClient,private authService: AuthService,private  router:  Router,public alertController: AlertController) { }
+  constructor(private constService: ConstantesService,private ptf:Platform,private storage: Storage,private httpClient: HttpClient,private authService: AuthService,private  router:  Router,public alertController: AlertController) { }
 
   ngOnInit() {
+    
+  }
+  ionViewDidEnter() {
     this.storage.get(TIPO_KEY).then((val) => {
       if(val == "1"){
         this.admin = true;
@@ -61,7 +63,7 @@ export class AgregarPage implements OnInit {
   registrar(form){
     if(form.value.password == form.value.password2){
         this.storage.get(EMPRESA_KEY).then((val) => {
-          this.httpClient.get(this.AUTH_SERVER_ADDRESS + '/usuarios/agregar/?username='+form.value.usuario+"&contras="+form.value.password+"&nombre="+form.value.nombre+"&apellido_p="+form.value.apellido_p+"&apellido_m="+form.value.apellido_m+"&tipo="+form.value.tipo+"&id_empresa="+val).subscribe(data => {
+          this.httpClient.get(this.constService.getApi() + '/usuarios/agregar/?username='+form.value.usuario+"&contras="+form.value.password+"&nombre="+form.value.nombre+"&apellido_p="+form.value.apellido_p+"&apellido_m="+form.value.apellido_m+"&tipo="+form.value.tipo+"&id_empresa="+val).subscribe(data => {
             if(data["status"]=="1"){
               this.presentAlert1();
             }else{

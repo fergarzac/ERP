@@ -4,6 +4,7 @@ import { HttpClient } from  '@angular/common/http';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
+import { ConstantesService } from 'src/app/constantes.service';
 
 const TOKEN_KEY = 'ACCESS_TOKEN';
 const TIPO_KEY = 'TIPO_ACCESS';
@@ -15,7 +16,6 @@ const EMPRESA_KEY = 'EMPRESA_KEY';
 })
 export class ModificarPage implements OnInit {
 
-  AUTH_SERVER_ADDRESS:  string  =  'http://localhost:8080';
   nombre_empresa: string = '';
   tipo: string = '';
   email: string = '';
@@ -23,7 +23,7 @@ export class ModificarPage implements OnInit {
   telefono: string = '';
   direccion: string = '';
   sitio_web: string = '';
-  constructor(private storage: Storage,private ptf:Platform,private httpClient: HttpClient,private  router:  Router,public alertController: AlertController) { }
+  constructor(private constService: ConstantesService,private storage: Storage,private ptf:Platform,private httpClient: HttpClient,private  router:  Router,public alertController: AlertController) { }
   async agregadoExitosa() {
     const alert = await this.alertController.create({
       header: 'Perfi',
@@ -44,8 +44,12 @@ export class ModificarPage implements OnInit {
     await alert.present();
   }
   ngOnInit() { 
+    
+  }
+
+  ionViewDidEnter() {
     this.storage.get(TOKEN_KEY).then((val) => {
-      this.httpClient.get(this.AUTH_SERVER_ADDRESS + '/empresa/obtenerDatosEmpresa?id=80808541-7f22-11e9-a055-204747e63348').subscribe(data => {
+      this.httpClient.get(this.constService.getApi() + '/empresa/obtenerDatosEmpresa?id=80808541-7f22-11e9-a055-204747e63348').subscribe(data => {
         console.log(data);
         this.nombre_empresa = data['nombre'];
         this.tipo = data['giro'];
@@ -57,11 +61,11 @@ export class ModificarPage implements OnInit {
       }, err => {
         console.log(err);
       });
-  });
+    });
   }
   modificar(){
     this.storage.get(EMPRESA_KEY).then((val) => {
-      this.httpClient.get(this.AUTH_SERVER_ADDRESS + '/empresa/dao-perfil-empresa?direccion='+
+      this.httpClient.get(this.constService.getApi() + '/empresa/dao-perfil-empresa?direccion='+
       this.direccion+'&telefono='+this.telefono+'&sitio_web='+this.sitio_web+'&descripcion='+this.descripcion+'&id='+val).subscribe(data => {
         if(data["status"]=="1"){
           this.agregadoExitosa();

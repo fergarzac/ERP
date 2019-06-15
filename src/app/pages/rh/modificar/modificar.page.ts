@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { Platform } from '@ionic/angular';
+import { ConstantesService } from 'src/app/constantes.service';
 
 const TOKEN_KEY = 'ACCESS_TOKEN';
 const TIPO_KEY = 'TIPO_ACCESS';
@@ -14,7 +15,6 @@ const EMPRESA_KEY = 'EMPRESA_KEY';
   styleUrls: ['./modificar.page.scss'],
 })
 export class ModificarPage implements OnInit {
-  AUTH_SERVER_ADDRESS:  string  =  'http://localhost:8080';
   id: string = "";
   nombre: string = "";
   apellido_p: string = "";
@@ -30,7 +30,7 @@ export class ModificarPage implements OnInit {
   puesto: string = "";
   tel: string = "";
   nss: string = "";
-  constructor(private ptf:Platform,private storage: Storage,private httpClient: HttpClient,private  router:  Router,public alertController: AlertController) { }
+  constructor(private constService: ConstantesService,private ptf:Platform,private storage: Storage,private httpClient: HttpClient,private  router:  Router,public alertController: AlertController) { }
   async modificacionExitosa() {
     const alert = await this.alertController.create({
       header: 'Modificaciones',
@@ -58,9 +58,12 @@ export class ModificarPage implements OnInit {
     await alert.present();
   }
   ngOnInit() {
+    
+  }
+  ionViewDidEnter() {
     this.id = this.ptf.getQueryParam("id");
     this.storage.get(TOKEN_KEY).then((val) => {
-      this.httpClient.get(this.AUTH_SERVER_ADDRESS + '/usuarios/perfil-usuario?id='+this.id).subscribe(data => {
+      this.httpClient.get(this.constService.getApi() + '/usuarios/perfil-usuario?id='+this.id).subscribe(data => {
         this.nombre = data['nombre'];
         this.apellido_p = data['apellido_paterno'];
         this.apellido_m = data['apellido_materno'];
@@ -80,12 +83,11 @@ export class ModificarPage implements OnInit {
       });
     });
   }
-
   modificar() {
     this.storage.get(TOKEN_KEY).then((val) => {
       this.fechai = this.formatDates(this.fechai);
       this.fechan = this.formatDates(this.fechan);
-      this.httpClient.get(this.AUTH_SERVER_ADDRESS + '/usuarios/actualizar-info-usuario?nombre='+
+      this.httpClient.get(this.constService.getApi() + '/usuarios/actualizar-info-usuario?nombre='+
       this.nombre+'&apellidoPaterno='+this.apellido_p+'&apellidoMaterno='+this.apellido_m+'&fechaNacimiento='+this.fechan
       +'&fechaIngreso='+this.fechai+'&sexo='+this.sexo+'&curp='+this.curp+'&rfc='+this.rfc+'&direccionCasa='+this.dir_casa
       +'&direccionOficina='+this.dir_oficina+'&gradoEstudios='+this.estudios+'&numSeguro='+this.nss+'&usuario='+this.id

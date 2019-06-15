@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { Platform } from '@ionic/angular';
+import { ConstantesService } from 'src/app/constantes.service';
 
 const TOKEN_KEY = 'ACCESS_TOKEN';
 const TIPO_KEY = 'TIPO_ACCESS';
@@ -20,8 +21,7 @@ export class AddPage implements OnInit {
   buttonColor:string ="#fff";
   listaTrabajadores = [];
   selected_id: string = '';
-  AUTH_SERVER_ADDRESS:  string  =  'http://localhost:8080';
-  constructor(private ptf:Platform,private storage: Storage,private httpClient: HttpClient,private  router:  Router,public alertController: AlertController) { }
+  constructor(private constService: ConstantesService,private ptf:Platform,private storage: Storage,private httpClient: HttpClient,private  router:  Router,public alertController: AlertController) { }
 
 
   ngOnInit() {
@@ -29,7 +29,7 @@ export class AddPage implements OnInit {
 
   buscar(){
     this.listaTrabajadores = [];
-    this.httpClient.get(this.AUTH_SERVER_ADDRESS + '/usuarios/obtener-usuario?id='+this.trabajador).subscribe(data => {
+    this.httpClient.get(this.constService.getApi() + '/usuarios/obtener-usuario?id='+this.trabajador).subscribe(data => {
       for(var clave in data) {
         if(data.hasOwnProperty(clave)){
           this.listaTrabajadores.push(data[clave]);
@@ -47,7 +47,7 @@ export class AddPage implements OnInit {
 
   agregar(){
     this.storage.get(EMPRESA_KEY).then((val) => {
-      this.httpClient.get(this.AUTH_SERVER_ADDRESS + '/empresa/agregar-viaticos?empresa='+val+'&concepto='+this.concepto+'&cantidad='+this.cantidad+"&id="+this.selected_id).subscribe(data => {
+      this.httpClient.get(this.constService.getApi() + '/empresa/agregar-viaticos?empresa='+val+'&concepto='+this.concepto+'&cantidad='+this.cantidad+"&id="+this.selected_id).subscribe(data => {
         if(data["status"]=="1"){
           this.agregadoExitosa();
         }else{

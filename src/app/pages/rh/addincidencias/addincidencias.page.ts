@@ -4,6 +4,7 @@ import { AlertController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { Platform } from '@ionic/angular';
 import { HttpClient } from  '@angular/common/http';
+import { ConstantesService } from 'src/app/constantes.service';
 
 const TOKEN_KEY = 'ACCESS_TOKEN';
 const TIPO_KEY = 'TIPO_ACCESS';
@@ -14,15 +15,16 @@ const EMPRESA_KEY = 'EMPRESA_KEY';
   styleUrls: ['./addincidencias.page.scss'],
 })
 export class AddincidenciasPage implements OnInit {
-  AUTH_SERVER_ADDRESS:  string  =  'http://localhost:8080';
   incidencias: string ="";
   tipo: string ="";
   fecha: string="";
   descripcion:string="";
   id: string ="";
-  constructor(private ptf:Platform,private storage: Storage,private httpClient: HttpClient,private  router:  Router, public alertController: AlertController) { }
+  constructor(private constService: ConstantesService,private ptf:Platform,private storage: Storage,private httpClient: HttpClient,private  router:  Router, public alertController: AlertController) { }
 
   ngOnInit() {
+  }
+  ionViewDidEnter() {
     this.id = this.ptf.getQueryParam("id");
   }
   agregar(){
@@ -33,8 +35,8 @@ export class AddincidenciasPage implements OnInit {
     var fecha = year+"/"+month+"/"+day;
     
     this.storage.get(TOKEN_KEY).then((val) => {
-      console.log(this.AUTH_SERVER_ADDRESS + '/usuarios/agregar-incidencia?usuario='+this.id+"&incidencia="+this.incidencias+"&tipo="+this.tipo+"&fecha="+fecha);
-      this.httpClient.get(this.AUTH_SERVER_ADDRESS + '/usuarios/agregar-incidencia?usuario='+this.id+"&incidencia="+this.incidencias+"&tipo="+this.tipo+"&fecha="+fecha).subscribe(data => {
+      console.log(this.constService.getApi() + '/usuarios/agregar-incidencia?usuario='+this.id+"&incidencia="+this.incidencias+"&tipo="+this.tipo+"&fecha="+fecha);
+      this.httpClient.get(this.constService.getApi() + '/usuarios/agregar-incidencia?usuario='+this.id+"&incidencia="+this.incidencias+"&tipo="+this.tipo+"&fecha="+fecha).subscribe(data => {
         if(data['status'] == 1){
           this.exitosoAlert();
         }else{

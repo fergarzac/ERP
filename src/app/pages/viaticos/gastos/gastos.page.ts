@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { Platform } from '@ionic/angular';
+import { ConstantesService } from 'src/app/constantes.service';
 
 const TOKEN_KEY = 'ACCESS_TOKEN';
 const TIPO_KEY = 'TIPO_ACCESS';
@@ -20,10 +21,13 @@ export class GastosPage implements OnInit {
   departamento = '';
   listaGastos = [];
   id: string = '';
-  AUTH_SERVER_ADDRESS:  string  =  'http://localhost:8080';
-  constructor(private ptf:Platform,private storage: Storage,private httpClient: HttpClient,private  router:  Router,public alertController: AlertController) { }
+  constructor(private constService: ConstantesService,private ptf:Platform,private storage: Storage,private httpClient: HttpClient,private  router:  Router,public alertController: AlertController) { }
 
   ngOnInit() {
+    
+  }
+  ionViewDidEnter() {
+    this.listaGastos = [];
     this.storage.get(TIPO_KEY).then((val) => {
       if(val == "3") {
         this.admin = false;
@@ -32,8 +36,7 @@ export class GastosPage implements OnInit {
       }
     });
     this.id = this.ptf.getQueryParam("id");
-    console.log(this.AUTH_SERVER_ADDRESS + '/usuarios/obtener-gastos?id='+this.id);
-    this.httpClient.get(this.AUTH_SERVER_ADDRESS + '/usuarios/obtener-gastos?id='+this.id).subscribe(data => {
+    this.httpClient.get(this.constService.getApi() + '/usuarios/obtener-gastos?id='+this.id).subscribe(data => {
       for(var clave in data) {
         if(data.hasOwnProperty(clave)){
           this.listaGastos.push(data[clave]);
@@ -43,7 +46,6 @@ export class GastosPage implements OnInit {
       console.log(err);
     });
   }
-
   agregarGastos(){
     this.router.navigateByUrl('menu/menu/viaticos/addgastos?id='+this.id);
   }
