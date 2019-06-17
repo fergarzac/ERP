@@ -1,7 +1,9 @@
 <ion-header>
   <ion-toolbar>
       <ion-buttons *ngIf="atrasBtn" slot="start">
-          <ion-button (click)="atras()">Atras</ion-button>
+          <ion-button (click)="atras()">
+            <ion-icon name="arrow-round-back"></ion-icon>
+          </ion-button>
       </ion-buttons>
       <ion-buttons *ngIf="!atrasBtn" slot="start">
         <ion-menu-button></ion-menu-button>

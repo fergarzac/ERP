@@ -20,7 +20,6 @@ const EMPRESA_KEY = 'EMPRESA_KEY';
 
 
 export class AuthService {
-  AUTH_SERVER_ADDRESS:  string  =  '';
   authstate = new BehaviorSubject(false);
 
   constructor(private constService: ConstantesService,private storage: Storage,private plt: Platform, private httpClient: HttpClient) {
@@ -47,7 +46,7 @@ export class AuthService {
   }
 
   registrar(user: User): Observable<AuthResponse> {
-    return this.httpClient.get(this.AUTH_SERVER_ADDRESS + '/usuarios/agregar/?username='+user.usuario+"&contras="+user.password+"&nombre="+user.nombre+"&apellido_p="+user.apellido_p+"&apellido_m="+user.apellido_m+"&tipo=1&id_empresa=80808541-7f22-11e9-a055-204747e63348").pipe(
+    return this.httpClient.get(this.constService.getApi() + '/usuarios/agregar/?username='+user.usuario+"&contras="+user.password+"&nombre="+user.nombre+"&apellido_p="+user.apellido_p+"&apellido_m="+user.apellido_m+"&tipo=1&id_empresa=80808541-7f22-11e9-a055-204747e63348").pipe(
       tap(async (res: AuthResponse) => {
         if (res.status == '1') {
           this.authstate.next(true);
