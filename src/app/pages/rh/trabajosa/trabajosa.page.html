@@ -14,11 +14,16 @@
         <ion-card *ngFor="let trabajos of listaTrabajos" >
             <ion-card-content>
               <div style="width: 100%">
-                <div style="width: 100%;">
+                <div style="width: 90%;display: inline-block;">
                     <ion-card-title>{{trabajos.nombre}}</ion-card-title>
                     <ion-card-subtitle>{{trabajos.telefono}}</ion-card-subtitle>
                     <ion-card-subtitle>{{trabajos.puesto}}</ion-card-subtitle>
                     <ion-card-subtitle>{{trabajos.periodo}}</ion-card-subtitle>
+                </div>
+                <div style="width: 10%;display: inline-block;float: right;">
+                  <div style="padding: 5px" (click)="confirmacion(trabajos.idtrabajos_anteriores)">
+                    X
+                  </div>
                 </div>
               </div>
             </ion-card-content>

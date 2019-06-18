@@ -55,6 +55,7 @@ export class IndexPage implements OnInit {
   }
 
   search(){
+    this.listaTrabajadores = [];
     this.storage.get(EMPRESA_KEY).then((val) => {
       this.httpClient.get(this.constService.getApi() + '/usuarios/obtenerUsuariosTodos?id='+val).subscribe(data => {
         console.log(data);

@@ -16,12 +16,62 @@ const EMPRESA_KEY = 'EMPRESA_KEY';
 })
 export class TrabajosaPage implements OnInit {
   listaTrabajos = [];
-  constructor(private constService: ConstantesService,private ptf:Platform,private storage: Storage,private httpClient: HttpClient,private  router:  Router,) { }
+  constructor(private constService: ConstantesService,private ptf:Platform,private storage: Storage,private httpClient: HttpClient,private  router:  Router, public alertController: AlertController) { }
   id: string = "";
   ngOnInit() {
     
   }
+  async confirmacion(id) {
+    const alert = await this.alertController.create({
+      header: 'Registrarse',
+      message: '¿ Estás seguro de eliminar este trabajo ?',
+      buttons: [{
+        text: 'Cancel',
+        role: 'cancel',
+        cssClass: 'secondary',
+        handler: (blah) => {
+          console.log('Confirm Cancel: blah');
+        }
+      }, {
+        text: 'Ok',
+        handler: () => {
+          this.eliminar(id);
+        }
+      }]
+    });
+
+    await alert.present();
+  }
+
+  async error() {
+    const alert = await this.alertController.create({
+      header: 'Registrarse',
+      message: 'Ha ocurrido un error.',
+      buttons: ['Ok']
+    });
+
+    await alert.present();
+  }
+
+  async success() {
+    const alert = await this.alertController.create({
+      header: 'Registrarse',
+      message: 'Eliminado Exitosamente.',
+      buttons: [{
+        text: 'Ok',
+        handler: () => {
+          this.buscar();
+        }
+      }]
+    });
+
+    await alert.present();
+  }
   ionViewDidEnter() {
+    this.buscar();
+  }
+
+  buscar(){
     this.listaTrabajos = [];
     this.id = this.ptf.getQueryParam("id");
     this.storage.get(TOKEN_KEY).then((val) => {
@@ -32,6 +82,19 @@ export class TrabajosaPage implements OnInit {
           }
         }
         console.log(data);
+      }, err => {
+        console.log(err);
+      });
+    });
+  }
+  eliminar(id) {
+    this.storage.get(TOKEN_KEY).then((val) => {
+      this.httpClient.get(this.constService.getApi() + '/usuarios/eliminar-trabajo-anterior?idTrabajo='+id).subscribe(data => {
+        if(data["status"]=="1"){
+          this.success();
+        }else{
+          this.error();
+        }
       }, err => {
         console.log(err);
       });
