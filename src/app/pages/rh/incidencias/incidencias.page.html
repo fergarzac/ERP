@@ -14,11 +14,16 @@
         <ion-card *ngFor="let incidencias of listaIncidencias" >
             <ion-card-content>
               <div style="width: 100%">
-                <div style="width: 100%;">
+                <div style="width: 90%;display: inline-block;">
                     <ion-card-title>{{incidencias.incidencias}}</ion-card-title>
                     <ion-card-subtitle>{{incidencias.tipo}}</ion-card-subtitle>
                     <ion-card-subtitle *ngIf="incidencias.fecha">{{incidencias.fecha}}</ion-card-subtitle>
                     <ion-card-subtitle *ngIf="incidencias.observaciones">{{incidencias.observaciones}}</ion-card-subtitle>
+                </div>
+                <div style="width: 10%;display: inline-block;float: right;">
+                  <div style="padding: 5px" (click)="confirmacion(salud.idsalud)">
+                    X
+                  </div>
                 </div>
               </div>
             </ion-card-content>

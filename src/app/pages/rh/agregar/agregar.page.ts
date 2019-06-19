@@ -63,7 +63,7 @@ export class AgregarPage implements OnInit {
   registrar(form){
     if(form.value.password == form.value.password2){
         this.storage.get(EMPRESA_KEY).then((val) => {
-          this.httpClient.get(this.constService.getApi() + '/usuarios/agregar/?username='+form.value.usuario+"&contras="+form.value.password+"&nombre="+form.value.nombre+"&apellido_p="+form.value.apellido_p+"&apellido_m="+form.value.apellido_m+"&tipo="+form.value.tipo+"&id_empresa="+val).subscribe(data => {
+          this.httpClient.get(this.constService.getApi() + '/usuarios/agregar/?username='+form.value.usuario+"&contras="+form.value.password+"&nombre="+form.value.nombre+"&apellido_p="+form.value.apellido_p+"&apellido_m="+form.value.apellido_m+"&tipo="+this.tipo+"&id_empresa="+val).subscribe(data => {
             if(data["status"]=="1"){
               this.presentAlert1();
             }else{
